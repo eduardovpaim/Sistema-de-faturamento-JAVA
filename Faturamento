@@ -1,0 +1,53 @@
+public class Client {
+  private String name;
+  private String address;
+  private String phoneNumber;
+
+  public Client(String name, String address, String phoneNumber) {
+    this.name = name;
+    this.address = address;
+    this.phoneNumber = phoneNumber;
+  }
+
+  // getters and setters
+}
+
+public class Invoice {
+  private int invoiceNumber;
+  private Date invoiceDate;
+  private Client client;
+  private List<InvoiceItem> items;
+  private double totalAmount;
+
+  public Invoice(int invoiceNumber, Date invoiceDate, Client client) {
+    this.invoiceNumber = invoiceNumber;
+    this.invoiceDate = invoiceDate;
+    this.client = client;
+    this.items = new ArrayList<>();
+  }
+
+  public void addItem(InvoiceItem item) {
+    items.add(item);
+  }
+
+  public double getTotalAmount() {
+    totalAmount = 0;
+    for (InvoiceItem item : items) {
+      totalAmount += item.getTotal();
+    }
+    return totalAmount;
+  }
+
+  // getters and setters
+}
+
+public class InvoiceGenerator {
+  private static int invoiceNumber = 0;
+
+  public static Invoice generateInvoice(Client client) {
+    invoiceNumber++;
+    Invoice invoice = new Invoice(invoiceNumber, new Date(), client);
+    // add items to invoice
+    return invoice;
+  }
+}
